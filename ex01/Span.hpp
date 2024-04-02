@@ -1,24 +1,43 @@
 #ifndef SPAN_HPP
-# define SPAN_HPP
+#define SPAN_HPP
 
-# include <iostream>
-# include <string>
+#include <exception>
+#include <iostream>
+#include <vector>
 
-class Span
-{
+class Span {
+private:
+  Span();
+  std::vector<int> numbers;
+  unsigned int maxLen;
 
-	public:
+public:
+  Span(unsigned int n);
+  Span(Span const &src);
+  ~Span();
+  Span &operator=(Span const &rhs);
+  int operator[](unsigned int index);
 
-		Span();
-		Span( Span const & src );
-		~Span();
+  class maxElementsException : public std::exception {
+    virtual const char *what() const throw() {
+      return ("the span is full cannot allocate anymore numbers on it");
+    }
+  };
 
-		Span &		operator=( Span const & rhs );
+  class minElementException : public std::exception {
+    virtual const char *what() const throw() {
+      return ("the span must contain at least two ints to calculate the span "
+              "between them ");
+    }
+  };
 
-	private:
-
+  void addNumber(int n);
+  void addManyNumbers(std::vector<int>::iterator first,
+                      std::vector<int>::iterator last);
+  unsigned int shortestSpan(void);
+  long int longestSpan(void);
 };
 
-std::ostream &			operator<<( std::ostream & o, Span const & i );
+std::ostream &operator<<(std::ostream &o, Span const &i);
 
-#endif /* ************************************************************ SPAN_H */
+#endif
