@@ -1,4 +1,6 @@
 #include "Span.hpp"
+#include <algorithm>
+#include <stdexcept>
 
 /*
 ** ------------------------------- CONSTRUCTOR --------------------------------
@@ -7,7 +9,11 @@
 Span::Span() {}
 
 Span::Span(unsigned int n) : maxLen(n) {}
-Span::Span(const Span &src) : maxLen(src.maxLen), numbers(src.numbers) {}
+Span::Span(const Span &src)
+{
+    numbers = src.numbers;
+    maxLen = src.maxLen;
+}
 
 /*
 ** -------------------------------- DESTRUCTOR --------------------------------
@@ -27,13 +33,23 @@ Span &Span::operator=(Span const &rhs) {
   return *this;
 }
 
-std::ostream &operator<<(std::ostream &o, Span const &i) { return o; }
+int Span::operator[](unsigned int index)
+{
+    if (numbers.size() <= index)
+        throw std::out_of_range("index is out of bound of the span");
+    return(numbers[index]);
+}
+
+std::ostream &operator<<(std::ostream &o, Span const &i) {
+    (void)i;
+    return o;
+}
 
 /*
 ** --------------------------------- METHODS ----------------------------------
 */
 void Span::addNumber(int n) {
-  if (numbers.size() + 1 == maxLen)
+  if (numbers.size() + 1 > maxLen)
     throw maxElementsException();
   numbers.push_back(n);
 }
@@ -48,9 +64,30 @@ void Span::addManyNumbers(std::vector<int>::iterator start,
   }
 }
 
-unsigned int Span::shortestSpan(void) {
+int Span::shortestSpan(void) {
   if (numbers.size() < 2)
     throw minElementException();
+std::vector<int> sorted(numbers);
+std::sort(sorted.begin(), sorted.end());
+unsigned int i = 1;
+int res = sorted[i] - sorted[i -1];
+while (i < sorted.size())
+{
+    if (sorted[i] - sorted[i -1] < res)
+        res = sorted[i] - sorted[i -1];
+    i++;
+}
+    return (res);
+}
+
+long int Span::longestSpan(void)
+{
+    if (numbers.size() < 2)
+        throw minElementException();
+    std::vector<int> sorted(numbers);
+    std::sort(sorted.begin(),sorted.end());
+    long int res = sorted[sorted.size() - 1] - sorted[0];
+    return (res);
 }
 /*
 ** --------------------------------- ACCESSOR ---------------------------------

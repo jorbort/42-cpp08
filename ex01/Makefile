@@ -1,9 +1,9 @@
-NAME = easyfind
+NAME = Span
 CFLAG = -Wall -Werror -Wextra -g -std=c++98 ##-fsanitize=address
-SRC = main.cpp
+SRC = main.cpp Span.cpp
 CC = c++
 OBJS = $(SRC:.cpp=.o)
-HEADER = easyfind.hpp
+HEADER = Span.hpp
 
 %.o: %.cpp
 	$(CC) -I. $(CFLAG) -c $< -o $@

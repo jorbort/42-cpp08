@@ -34,7 +34,7 @@ public:
   void addNumber(int n);
   void addManyNumbers(std::vector<int>::iterator first,
                       std::vector<int>::iterator last);
-  unsigned int shortestSpan(void);
+  int shortestSpan(void);
   long int longestSpan(void);
 };
 
