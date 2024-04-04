@@ -64,29 +64,29 @@ void Span::addManyNumbers(std::vector<int>::iterator start,
   }
 }
 
-int Span::shortestSpan(void) {
+unsigned int Span::shortestSpan(void) {
   if (numbers.size() < 2)
     throw minElementException();
 std::vector<int> sorted(numbers);
 std::sort(sorted.begin(), sorted.end());
 unsigned int i = 1;
-int res = sorted[i] - sorted[i -1];
+unsigned int res = static_cast<unsigned int>(sorted[i] - sorted[i -1]);
 while (i < sorted.size())
 {
-    if (sorted[i] - sorted[i -1] < res)
-        res = sorted[i] - sorted[i -1];
+    if ((unsigned int) (sorted[i] - sorted[i -1]) < res)
+        res = static_cast<unsigned int>(sorted[i] - sorted[i -1]);
     i++;
 }
     return (res);
 }
 
-long int Span::longestSpan(void)
+unsigned int Span::longestSpan(void)
 {
     if (numbers.size() < 2)
         throw minElementException();
     std::vector<int> sorted(numbers);
     std::sort(sorted.begin(),sorted.end());
-    long int res = sorted[sorted.size() - 1] - sorted[0];
+    long int res =(unsigned int) (sorted[sorted.size() - 1] - sorted[0]);
     return (res);
 }
 /*

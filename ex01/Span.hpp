@@ -26,16 +26,15 @@ public:
 
   class minElementException : public std::exception {
     virtual const char *what() const throw() {
-      return ("the span must contain at least two ints to calculate the span "
-              "between them ");
+      return ("the span must contain at least two ints to calculate the span between them ");
     }
   };
 
   void addNumber(int n);
   void addManyNumbers(std::vector<int>::iterator first,
                       std::vector<int>::iterator last);
-  int shortestSpan(void);
-  long int longestSpan(void);
+  unsigned int shortestSpan(void);
+  unsigned int longestSpan(void);
 };
 
 std::ostream &operator<<(std::ostream &o, Span const &i);
