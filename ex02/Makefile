@@ -1,9 +1,9 @@
-NAME = easyfind
+NAME = MutantStack
 CFLAG = -Wall -Werror -Wextra -g -std=c++98 ##-fsanitize=address
 SRC = main.cpp
 CC = c++
 OBJS = $(SRC:.cpp=.o)
-HEADER = easyfind.hpp
+HEADER = MutantStack.hpp
 
 %.o: %.cpp
 	$(CC) -I. $(CFLAG) -c $< -o $@
